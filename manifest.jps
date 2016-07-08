@@ -5,7 +5,7 @@
 		"id": "alfresco",
 		"name": "Alfresco",
 		"version": "5.1",
-		"logo": "https://raw.githubusercontent.com/jelastic-jps/alfresco/master/images/view.png",
+		"logo": "https://raw.githubusercontent.com/d3sdichadko/alfresco/master/images/view.png",
 		"type": "java",
 		"homepage": "http://www.alfresco.com/",
 		"description": {
@@ -26,32 +26,37 @@
 						"extip": false,
 						"count": 1,
 						"cloudlets": 16,
-						"nodeType": "mysql5"
+						"nodeType": "postgresql9"
 					}
 				]
 			},
 			"deployments": [{
-					"archive": "https://github.com/jelastic-jps/alfresco/raw/master/dumps/share.war",
+					"archive": "https://github.com/d3sdichadko/alfresco/raw/master/dumps/share.war",
 					"name": "share-5.1.war",
 					"context": "share"
 				}, {
-					"archive": "https://github.com/jelastic-jps/alfresco/raw/master/dumps/alfresco.war",
+					"archive": "https://github.com/d3sdichadko/alfresco/raw/master/dumps/alfresco.war",
 					"name": "alfresco-5.1.war",
 					"context": "alfresco"
+				}, {
+					"archive": "https://screen.global/dl/index.php/s/JnCy2ta7XpdvB4z/download",
+					"name": "solr4.war",
+					"context": "alfresco"
 				}
+				
 			],
 			"upload": [{
 					"nodeMission": "cp",
-					"sourcePath": "https://raw.githubusercontent.com/jelastic-jps/alfresco/master/libs/alfresco-global.properties",
+					"sourcePath": "https://raw.githubusercontent.com/d3sdichadko/alfresco/master/libs/alfresco-global.properties",
 					"destPath": "${WEBAPPS}/alfresco/WEB-INF/classes/alfresco-global.properties"
 				}, {
 					"nodeMission": "cp",
-					"sourcePath": "https://raw.githubusercontent.com/jelastic-jps/alfresco/master/libs/mysql-connector-java-5.0.8-bin.jar",
-					"destPath": "${JAVA_LIB}/mysql-connector-java-5.0.8-bin.jar"
+					"sourcePath": "https://raw.githubusercontent.com/d3sdichadko/alfresco/master/libs/postgresql-9.4-1201-jdbc41.jar",
+					"destPath": "${JAVA_LIB}/postgresql-9.4-1201-jdbc41.jar"
 				}
 			],
 			"configs": [{
-					"nodeType": "mysql5",
+					"nodeType": "postgresql9",
 					"database": {
 						"name": "alfresco",
 						"user": "alfresco"
@@ -61,16 +66,16 @@
 					"path": "${WEBAPPS}/alfresco/WEB-INF/classes/alfresco-global.properties",
 					"replacements": [{
 							"pattern": "{DB_HOST}",
-							"replacement": "${nodes.mysql5.address}"
+							"replacement": "${nodes.postgresql9.address}"
 						}, {
 							"pattern": "{DB_USER}",
-							"replacement": "${nodes.mysql5.database.user}"
+							"replacement": "${nodes.postgresql9.database.user}"
 						}, {
 							"pattern": "{DB_PASSWORD}",
-							"replacement": "${nodes.mysql5.database.password}"
+							"replacement": "${nodes.postgresql9.database.password}"
 						}, {
 							"pattern": "{DB_NAME}",
-							"replacement": "${nodes.mysql5.database.name}"
+							"replacement": "${nodes.postgresql9.database.name}"
 						}
 					]
 				}, {
